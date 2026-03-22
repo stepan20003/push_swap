@@ -25,70 +25,69 @@ static void	rotate_to_top(t_stack **a, int pos, int size, t_ops *ops)
 	}
 }
 
+static void	rotate_max_up(t_stack **b, int pos, t_ops *ops)
+{
+	int	size;
+
+	size = stack_size(*b);
+	if (pos <= size / 2)
+		while (pos--)
+			funct_rb(b, ops);
+	else
+		while (pos++ < size)
+			funct_rrb(b, ops);
+}
+
 static void	push_max_to_a(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*tmp;
-	int		max_rank;
+	t_stack	*max;
 	int		pos;
-	int		size;
+	int		c;
 
 	tmp = *b;
-	max_rank = tmp->rank;
+	max = *b;
+	pos = 0;
+	c = 0;
 	while (tmp)
 	{
-		if (tmp->rank > max_rank)
-			max_rank = tmp->rank;
+		if (tmp->rank > max->rank)
+		{
+			max = tmp;
+			pos = c;
+		}
 		tmp = tmp->next;
+		c++;
 	}
-	pos = 0;
-	tmp = *b;
-	while (tmp->rank != max_rank)
-	{
-		pos++;
-		tmp = tmp->next;
-	}
-	size = stack_size(*b);
-	if (pos <= size / 2)
-		while (pos-- > 0)
-			funct_rb(b, ops);
-	else
-	{
-		pos = size - pos;
-		while (pos-- > 0)
-			funct_rrb(b, ops);
-	}
+	rotate_max_up(b, pos, ops);
 	funct_pa(a, b, ops);
 }
 
-static int	find_chunk_pos(t_stack *a, int min, int max)
+static void	process_chunk(t_data *data, int min, int max)
 {
 	t_stack	*tmp;
 	int		pos;
+	int		size;
 
-	tmp = a;
+	tmp = data->a;
 	pos = 0;
+	while (tmp && (tmp->rank < min || tmp->rank > max))
+	{
+		pos++;
+		tmp = tmp->next;
+	}
 	while (tmp)
 	{
-		if (tmp->rank >= min && tmp->rank <= max)
-			return (pos);
-		tmp = tmp->next;
-		pos++;
-	}
-	return (-1);
-}
-
-static void	push_chunk(t_stack **a, t_stack **b, int min, int max, t_ops *ops)
-{
-	int	pos;
-	int	size;
-
-	pos = find_chunk_pos(*a, min, max);
-	while (pos != -1)
-	{
-		size = stack_size(*a);
-		rotate_to_top(a, pos, size, ops);
-		funct_pb(a, b, ops);
-		pos = find_chunk_pos(*a, min, max);
+		size = stack_size(data->a);
+		rotate_to_top(&data->a, pos, size, &data->ops);
+		funct_pb(&data->a, &data->b, &data->ops);
+		tmp = data->a;
+		pos = 0;
+		while (tmp && (tmp->rank < min || tmp->rank > max))
+		{
+			pos++;
+			tmp = tmp->next;
+		}
 	}
 }
 
@@ -108,11 +107,10 @@ void	medium_sort(t_data *data)
 	i = 0;
 	while (i < chunks)
 	{
-		push_chunk(&data->a, &data->b, i * chunk_size,
-			(i + 1) * chunk_size - 1, &data->ops);
+		process_chunk(data, i * chunk_size, (i + 1) * chunk_size - 1);
 		i++;
 	}
-	push_chunk(&data->a, &data->b, i * chunk_size, size - 1, &data->ops);
+	process_chunk(data, i * chunk_size, size - 1);
 	while (data->b)
 		push_max_to_a(&data->a, &data->b, &data->ops);
 }

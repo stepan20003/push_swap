@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/21 15:05:35 by ststepan          #+#    #+#             */
+/*   Updated: 2026/03/23 00:00:00 by ststepan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -55,7 +67,7 @@ void	free_and_error(char **arr, int j);
 int		ft_sqrt(int n);
 double	compute_disorder(t_stack *a);
 void	print_bench(double disorder, int orig_strat, int used_strat,
-		t_ops *ops);
+			t_ops *ops);
 void	adaptive_sort(t_data *data);
 void	assign_ranks(t_stack *a);
 void	simple_sort(t_data *data);

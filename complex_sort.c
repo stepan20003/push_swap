@@ -44,21 +44,21 @@ static int	max_bits(int size)
 	return (bits);
 }
 
-static void	radix_pass(t_stack **a, t_stack **b, int bit, int size, t_ops *ops)
+static void	radix_pass(t_data *data, int bit, int size)
 {
 	int	i;
 
 	i = 0;
 	while (i < size)
 	{
-		if (((*a)->rank >> bit) & 1)
-			funct_ra(a, ops);
+		if (((data->a)->rank >> bit) & 1)
+			funct_ra(&data->a, &data->ops);
 		else
-			funct_pb(a, b, ops);
+			funct_pb(&data->a, &data->b, &data->ops);
 		i++;
 	}
-	while (*b)
-		funct_pa(a, b, ops);
+	while (data->b)
+		funct_pa(&data->a, &data->b, &data->ops);
 }
 
 void	complex_sort(t_data *data)
@@ -73,7 +73,7 @@ void	complex_sort(t_data *data)
 	bit = 0;
 	while (bit < bits)
 	{
-		radix_pass(&data->a, &data->b, bit, size, &data->ops);
+		radix_pass(data, bit, size);
 		bit++;
 	}
 }
