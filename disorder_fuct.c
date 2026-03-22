@@ -17,17 +17,17 @@ void	adaptive_sort(t_data *data)
 	if (data->disorder < 0.2)
 	{
 		data->strategy = SIMPLE;
-		simple_sort(&data->a, &data->b);
+		simple_sort(data);
 	}
 	else if (data->disorder < 0.5)
 	{
 		data->strategy = MEDIUM;
-		medium_sort(&data->a, &data->b);
+		medium_sort(data);
 	}
 	else
 	{
 		data->strategy = COMPLEX;
-		complex_sort(&data->a, &data->b);
+		complex_sort(data);
 	}
 }
 

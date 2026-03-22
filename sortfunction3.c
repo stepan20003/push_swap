@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	funct_rrr(t_stack **a, t_stack **b)
+void	funct_rrr(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 	t_stack	*start;
@@ -37,6 +37,6 @@ void	funct_rrr(t_stack **a, t_stack **b)
 		temp->next = *b;
 		*b = temp;
 	}
-	g_ops.rrr++;
+	ops->rrr++;
 	write(1, "rrr\n", 4);
 }

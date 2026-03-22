@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	funct_ra(t_stack **a)
+void	funct_ra(t_stack **a, t_ops *ops)
 {
 	t_stack	*temp;
 	t_stack	*start;
@@ -26,11 +26,11 @@ void	funct_ra(t_stack **a)
 	start->next = temp;
 	*a = (*a)->next;
 	temp->next = NULL;
-	g_ops.ra++;
+	ops->ra++;
 	write(1, "ra\n", 3);
 }
 
-void	funct_rb(t_stack **b)
+void	funct_rb(t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 	t_stack	*start;
@@ -44,11 +44,11 @@ void	funct_rb(t_stack **b)
 	start->next = temp;
 	*b = (*b)->next;
 	temp->next = NULL;
-	g_ops.rb++;
+	ops->rb++;
 	write(1, "rb\n", 3);
 }
 
-void	funct_rr(t_stack **a, t_stack **b)
+void	funct_rr(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 	t_stack	*start;
@@ -73,11 +73,11 @@ void	funct_rr(t_stack **a, t_stack **b)
 		*b = (*b)->next;
 		temp->next = NULL;
 	}
-	g_ops.rr++;
+	ops->rr++;
 	write(1, "rr\n", 3);
 }
 
-void	funct_rra(t_stack **a)
+void	funct_rra(t_stack **a, t_ops *ops)
 {
 	t_stack	*temp;
 	t_stack	*start;
@@ -91,11 +91,11 @@ void	funct_rra(t_stack **a)
 	start->next = NULL;
 	temp->next = *a;
 	*a = temp;
-	g_ops.rra++;
+	ops->rra++;
 	write(1, "rra\n", 4);
 }
 
-void	funct_rrb(t_stack **b)
+void	funct_rrb(t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 	t_stack	*start;
@@ -109,6 +109,6 @@ void	funct_rrb(t_stack **b)
 	start->next = NULL;
 	temp->next = *b;
 	*b = temp;
-	g_ops.rrb++;
+	ops->rrb++;
 	write(1, "rrb\n", 4);
 }

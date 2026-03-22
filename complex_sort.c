@@ -44,7 +44,7 @@ static int	max_bits(int size)
 	return (bits);
 }
 
-static void	radix_pass(t_stack **a, t_stack **b, int bit, int size)
+static void	radix_pass(t_stack **a, t_stack **b, int bit, int size, t_ops *ops)
 {
 	int	i;
 
@@ -52,28 +52,28 @@ static void	radix_pass(t_stack **a, t_stack **b, int bit, int size)
 	while (i < size)
 	{
 		if (((*a)->rank >> bit) & 1)
-			funct_ra(a);
+			funct_ra(a, ops);
 		else
-			funct_pb(a, b);
+			funct_pb(a, b, ops);
 		i++;
 	}
 	while (*b)
-		funct_pa(a, b);
+		funct_pa(a, b, ops);
 }
 
-void	complex_sort(t_stack **a, t_stack **b)
+void	complex_sort(t_data *data)
 {
 	int	size;
 	int	bits;
 	int	bit;
 
-	assign_ranks(*a);
-	size = stack_size(*a);
+	assign_ranks(data->a);
+	size = stack_size(data->a);
 	bits = max_bits(size);
 	bit = 0;
 	while (bit < bits)
 	{
-		radix_pass(a, b, bit, size);
+		radix_pass(&data->a, &data->b, bit, size, &data->ops);
 		bit++;
 	}
 }

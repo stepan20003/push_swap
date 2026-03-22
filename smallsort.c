@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	sort_three(t_stack **a)
+void	sort_three(t_stack **a, t_ops *ops)
 {
 	int	first;
 	int	second;
@@ -22,19 +22,19 @@ void	sort_three(t_stack **a)
 	second = (*a)->next->value;
 	third = (*a)->next->next->value;
 	if (first > second && second < third && first < third)
-		funct_sa(a);
+		funct_sa(a, ops);
 	else if (first > second && second > third)
 	{
-		funct_sa(a);
-		funct_rra(a);
+		funct_sa(a, ops);
+		funct_rra(a, ops);
 	}
 	else if (first > second && second < third && first > third)
-		funct_ra(a);
+		funct_ra(a, ops);
 	else if (first < second && second > third && first < third)
 	{
-		funct_sa(a);
-		funct_ra(a);
+		funct_sa(a, ops);
+		funct_ra(a, ops);
 	}
 	else if (first < second && second > third && first > third)
-		funct_rra(a);
+		funct_rra(a, ops);
 }

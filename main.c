@@ -12,8 +12,6 @@
 
 #include "push_swap.h"
 
-t_ops	g_ops;
-
 static int	get_strategy(char *flag)
 {
 	if (ft_strcmp(flag, "--simple") == 0)
@@ -57,11 +55,11 @@ static void	parse_flags(t_data *data, int *argc, char ***argv)
 static void	run_sort(t_data *data)
 {
 	if (data->strategy == SIMPLE)
-		simple_sort(&data->a, &data->b);
+		simple_sort(data);
 	else if (data->strategy == MEDIUM)
-		medium_sort(&data->a, &data->b);
+		medium_sort(data);
 	else if (data->strategy == COMPLEX)
-		complex_sort(&data->a, &data->b);
+		complex_sort(data);
 	else
 		adaptive_sort(data);
 }
@@ -73,17 +71,17 @@ static void	init_data(t_data *data)
 	data->strategy = ADAPTIVE;
 	data->bench = 0;
 	data->disorder = 0;
-	g_ops.sa = 0;
-	g_ops.sb = 0;
-	g_ops.ss = 0;
-	g_ops.pa = 0;
-	g_ops.pb = 0;
-	g_ops.ra = 0;
-	g_ops.rb = 0;
-	g_ops.rr = 0;
-	g_ops.rra = 0;
-	g_ops.rrb = 0;
-	g_ops.rrr = 0;
+	data->ops.sa = 0;
+	data->ops.sb = 0;
+	data->ops.ss = 0;
+	data->ops.pa = 0;
+	data->ops.pb = 0;
+	data->ops.ra = 0;
+	data->ops.rb = 0;
+	data->ops.rr = 0;
+	data->ops.rra = 0;
+	data->ops.rrb = 0;
+	data->ops.rrr = 0;
 }
 
 int	main(int argc, char **argv)
@@ -103,12 +101,12 @@ int	main(int argc, char **argv)
 	if (is_sorted(data.a))
 	{
 		if (data.bench)
-			print_bench(data.disorder, orig_strat, data.strategy);
+			print_bench(data.disorder, orig_strat, data.strategy, &data.ops);
 		return (free_stack(data.a), 0);
 	}
 	run_sort(&data);
 	if (data.bench)
-		print_bench(data.disorder, orig_strat, data.strategy);
+		print_bench(data.disorder, orig_strat, data.strategy, &data.ops);
 	free_stack(data.a);
 	free_stack(data.b);
 	return (0);

@@ -36,31 +36,31 @@ static int	find_min_pos(t_stack *a)
 	return (min_pos);
 }
 
-static void	bring_to_top(t_stack **a, int pos, int size)
+static void	bring_to_top(t_stack **a, int pos, int size, t_ops *ops)
 {
 	if (pos <= size / 2)
 		while (pos-- > 0)
-			funct_ra(a);
+			funct_ra(a, ops);
 	else
 	{
 		pos = size - pos;
 		while (pos-- > 0)
-			funct_rra(a);
+			funct_rra(a, ops);
 	}
 }
 
-void	simple_sort(t_stack **a, t_stack **b)
+void	simple_sort(t_data *data)
 {
 	int	size;
 	int	pos;
 
-	while (*a)
+	while (data->a)
 	{
-		size = stack_size(*a);
-		pos = find_min_pos(*a);
-		bring_to_top(a, pos, size);
-		funct_pb(a, b);
+		size = stack_size(data->a);
+		pos = find_min_pos(data->a);
+		bring_to_top(&data->a, pos, size, &data->ops);
+		funct_pb(&data->a, &data->b, &data->ops);
 	}
-	while (*b)
-		funct_pa(a, b);
+	while (data->b)
+		funct_pa(&data->a, &data->b, &data->ops);
 }

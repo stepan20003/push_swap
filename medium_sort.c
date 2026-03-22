@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-static void	rotate_to_top(t_stack **a, int pos, int size)
+static void	rotate_to_top(t_stack **a, int pos, int size, t_ops *ops)
 {
 	if (pos <= size / 2)
 		while (pos-- > 0)
-			funct_ra(a);
+			funct_ra(a, ops);
 	else
 	{
 		pos = size - pos;
 		while (pos-- > 0)
-			funct_rra(a);
+			funct_rra(a, ops);
 	}
 }
 
-static void	push_max_to_a(t_stack **a, t_stack **b)
+static void	push_max_to_a(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*tmp;
 	int		max_rank;
@@ -50,14 +50,14 @@ static void	push_max_to_a(t_stack **a, t_stack **b)
 	size = stack_size(*b);
 	if (pos <= size / 2)
 		while (pos-- > 0)
-			funct_rb(b);
+			funct_rb(b, ops);
 	else
 	{
 		pos = size - pos;
 		while (pos-- > 0)
-			funct_rrb(b);
+			funct_rrb(b, ops);
 	}
-	funct_pa(a, b);
+	funct_pa(a, b, ops);
 }
 
 static int	find_chunk_pos(t_stack *a, int min, int max)
@@ -77,7 +77,7 @@ static int	find_chunk_pos(t_stack *a, int min, int max)
 	return (-1);
 }
 
-static void	push_chunk(t_stack **a, t_stack **b, int min, int max)
+static void	push_chunk(t_stack **a, t_stack **b, int min, int max, t_ops *ops)
 {
 	int	pos;
 	int	size;
@@ -86,21 +86,21 @@ static void	push_chunk(t_stack **a, t_stack **b, int min, int max)
 	while (pos != -1)
 	{
 		size = stack_size(*a);
-		rotate_to_top(a, pos, size);
-		funct_pb(a, b);
+		rotate_to_top(a, pos, size, ops);
+		funct_pb(a, b, ops);
 		pos = find_chunk_pos(*a, min, max);
 	}
 }
 
-void	medium_sort(t_stack **a, t_stack **b)
+void	medium_sort(t_data *data)
 {
 	int	size;
 	int	chunk_size;
 	int	chunks;
 	int	i;
 
-	assign_ranks(*a);
-	size = stack_size(*a);
+	assign_ranks(data->a);
+	size = stack_size(data->a);
 	chunks = ft_sqrt(size);
 	if (chunks < 1)
 		chunks = 1;
@@ -108,10 +108,11 @@ void	medium_sort(t_stack **a, t_stack **b)
 	i = 0;
 	while (i < chunks)
 	{
-		push_chunk(a, b, i * chunk_size, (i + 1) * chunk_size - 1);
+		push_chunk(&data->a, &data->b, i * chunk_size,
+			(i + 1) * chunk_size - 1, &data->ops);
 		i++;
 	}
-	push_chunk(a, b, i * chunk_size, size - 1);
-	while (*b)
-		push_max_to_a(a, b);
+	push_chunk(&data->a, &data->b, i * chunk_size, size - 1, &data->ops);
+	while (data->b)
+		push_max_to_a(&data->a, &data->b, &data->ops);
 }

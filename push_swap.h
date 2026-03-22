@@ -36,12 +36,11 @@ typedef struct s_data
 {
 	t_stack	*a;
 	t_stack	*b;
+	t_ops	ops;
 	int		strategy;
 	int		bench;
 	double	disorder;
 }	t_data;
-
-extern t_ops	g_ops;
 
 int		ft_strcmp(char *s1, char *s2);
 void	parse_input(int count, char **argv, t_stack **a);
@@ -55,24 +54,25 @@ void	ft_error(void);
 void	free_and_error(char **arr, int j);
 int		ft_sqrt(int n);
 double	compute_disorder(t_stack *a);
-void	print_bench(double disorder, int orig_strat, int used_strat);
+void	print_bench(double disorder, int orig_strat, int used_strat,
+		t_ops *ops);
 void	adaptive_sort(t_data *data);
 void	assign_ranks(t_stack *a);
-void	simple_sort(t_stack **a, t_stack **b);
-void	medium_sort(t_stack **a, t_stack **b);
-void	complex_sort(t_stack **a, t_stack **b);
-void	sort_three(t_stack **a);
-void	funct_sa(t_stack **a);
-void	funct_sb(t_stack **b);
-void	funct_ss(t_stack **a, t_stack **b);
-void	funct_pa(t_stack **a, t_stack **b);
-void	funct_pb(t_stack **a, t_stack **b);
-void	funct_ra(t_stack **a);
-void	funct_rb(t_stack **b);
-void	funct_rr(t_stack **a, t_stack **b);
-void	funct_rra(t_stack **a);
-void	funct_rrb(t_stack **b);
-void	funct_rrr(t_stack **a, t_stack **b);
+void	simple_sort(t_data *data);
+void	medium_sort(t_data *data);
+void	complex_sort(t_data *data);
+void	sort_three(t_stack **a, t_ops *ops);
+void	funct_sa(t_stack **a, t_ops *ops);
+void	funct_sb(t_stack **b, t_ops *ops);
+void	funct_ss(t_stack **a, t_stack **b, t_ops *ops);
+void	funct_pa(t_stack **a, t_stack **b, t_ops *ops);
+void	funct_pb(t_stack **a, t_stack **b, t_ops *ops);
+void	funct_ra(t_stack **a, t_ops *ops);
+void	funct_rb(t_stack **b, t_ops *ops);
+void	funct_rr(t_stack **a, t_stack **b, t_ops *ops);
+void	funct_rra(t_stack **a, t_ops *ops);
+void	funct_rrb(t_stack **b, t_ops *ops);
+void	funct_rrr(t_stack **a, t_stack **b, t_ops *ops);
 void	stack_add_back(t_stack **a, t_stack *new);
 long	ft_atol(char *str);
 int		ft_putstr(char *s);

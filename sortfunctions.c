@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	funct_sa(t_stack **a)
+void	funct_sa(t_stack **a, t_ops *ops)
 {
 	t_stack	*temp;
 
@@ -22,11 +22,11 @@ void	funct_sa(t_stack **a)
 	*a = (*a)->next;
 	temp->next = (*a)->next;
 	(*a)->next = temp;
-	g_ops.sa++;
+	ops->sa++;
 	write(1, "sa\n", 3);
 }
 
-void	funct_sb(t_stack **b)
+void	funct_sb(t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 
@@ -36,11 +36,11 @@ void	funct_sb(t_stack **b)
 	*b = (*b)->next;
 	temp->next = (*b)->next;
 	(*b)->next = temp;
-	g_ops.sb++;
+	ops->sb++;
 	write(1, "sb\n", 3);
 }
 
-void	funct_ss(t_stack **a, t_stack **b)
+void	funct_ss(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 
@@ -54,11 +54,11 @@ void	funct_ss(t_stack **a, t_stack **b)
 	*b = (*b)->next;
 	temp->next = (*b)->next;
 	(*b)->next = temp;
-	g_ops.ss++;
+	ops->ss++;
 	write(1, "ss\n", 3);
 }
 
-void	funct_pa(t_stack **a, t_stack **b)
+void	funct_pa(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 
@@ -68,11 +68,11 @@ void	funct_pa(t_stack **a, t_stack **b)
 	*b = (*b)->next;
 	temp->next = *a;
 	*a = temp;
-	g_ops.pa++;
+	ops->pa++;
 	write(1, "pa\n", 3);
 }
 
-void	funct_pb(t_stack **a, t_stack **b)
+void	funct_pb(t_stack **a, t_stack **b, t_ops *ops)
 {
 	t_stack	*temp;
 
@@ -82,6 +82,6 @@ void	funct_pb(t_stack **a, t_stack **b)
 	*a = (*a)->next;
 	temp->next = *b;
 	*b = temp;
-	g_ops.pb++;
+	ops->pb++;
 	write(1, "pb\n", 3);
 }
