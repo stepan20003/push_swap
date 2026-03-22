@@ -6,7 +6,7 @@
 /*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:05:16 by ststepan          #+#    #+#             */
-/*   Updated: 2026/03/21 15:27:32 by ststepan         ###   ########.fr       */
+/*   Updated: 2026/03/21 16:30:15 by ststepan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static int	get_strategy(char *flag)
 static void	parse_flags(t_data *data, int *argc, char ***argv)
 {
 	int	flag;
+	int	strategy_set;
 
+	strategy_set = 0;
 	while (*argc > 1 && (*argv)[1][0] == '-' && (*argv)[1][1] == '-')
 	{
 		flag = get_strategy((*argv)[1]);
@@ -39,7 +41,12 @@ static void	parse_flags(t_data *data, int *argc, char ***argv)
 		else if (flag == -1)
 			data->bench = 1;
 		else
+		{
+			if (strategy_set)
+				ft_error();
 			data->strategy = flag;
+			strategy_set = 1;
+		}
 		(*argv)++;
 		(*argc)--;
 	}

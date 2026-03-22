@@ -6,7 +6,7 @@
 /*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:24:41 by ststepan          #+#    #+#             */
-/*   Updated: 2026/03/21 15:29:47 by ststepan         ###   ########.fr       */
+/*   Updated: 2026/03/21 16:34:10 by ststepan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	process_number(char *str, t_stack **a, char **numbers, int j)
 
 void	parse_input(int count, char **argv, t_stack **a)
 {
-	char **numbers;
-	int i;
-	int j;
+	char	**numbers;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < count)
@@ -60,6 +60,11 @@ void	parse_input(int count, char **argv, t_stack **a)
 		numbers = ft_split(argv[i], ' ');
 		if (!numbers)
 			ft_error();
+		if (!numbers[0])
+		{
+			free(numbers);
+			ft_error();
+		}
 		j = 0;
 		while (numbers[j])
 		{

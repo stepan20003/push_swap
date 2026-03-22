@@ -6,9 +6,11 @@
 /*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 17:22:02 by ststepan          #+#    #+#             */
-/*   Updated: 2026/03/21 15:26:58 by ststepan         ###   ########.fr       */
+/*   Updated: 2026/03/21 16:27:26 by ststepan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 int	ft_putchar(char c)
 {

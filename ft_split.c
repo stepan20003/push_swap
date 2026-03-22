@@ -6,7 +6,7 @@
 /*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 17:24:30 by ststepan          #+#    #+#             */
-/*   Updated: 2026/03/21 15:27:03 by ststepan         ###   ########.fr       */
+/*   Updated: 2026/03/21 16:22:59 by ststepan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ static int	letter_count(char const *s, char c)
 		count++;
 	}
 	return (count);
-}
-
-static void	free_arr(char **arr, size_t i)
-{
-	while (i > 0)
-		free(arr[--i]);
-	free(arr);
 }
 
 char	**ft_split(char const *s, char c)

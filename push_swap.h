@@ -26,7 +26,7 @@ typedef struct s_data
 	double	disorder;
 }	t_data;
 
-int		get_strategy(char *flag);
+int		ft_strcmp(char *s1, char *s2);
 void	parse_input(int count, char **argv, t_stack **a);
 int		is_sorted(t_stack *a);
 int		is_duplicate(t_stack *a, int val);
@@ -59,7 +59,11 @@ void	stack_add_back(t_stack **a, t_stack *new);
 long	ft_atol(char *str);
 int		ft_putstr(char *s);
 int		ft_putchar(char c);
-void 	ft_putnbr(int n);
-void 	print_disorder(double disorder);
+void	ft_putnbr(int n);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c);
+int		ft_isdigit(int c);
+void	print_disorder(double disorder);
 t_stack	*stack_new(int value);
 #endif
