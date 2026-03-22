@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	assign_ranks(t_stack *a)
+void	assign_ranks(t_stack *a)
 {
 	t_stack	*i;
 	t_stack	*j;

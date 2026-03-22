@@ -28,21 +28,21 @@ static void	rotate_to_top(t_stack **a, int pos, int size)
 static void	push_max_to_a(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
-	int		max_val;
+	int		max_rank;
 	int		pos;
 	int		size;
 
 	tmp = *b;
-	max_val = tmp->value;
+	max_rank = tmp->rank;
 	while (tmp)
 	{
-		if (tmp->value > max_val)
-			max_val = tmp->value;
+		if (tmp->rank > max_rank)
+			max_rank = tmp->rank;
 		tmp = tmp->next;
 	}
 	pos = 0;
 	tmp = *b;
-	while (tmp->value != max_val)
+	while (tmp->rank != max_rank)
 	{
 		pos++;
 		tmp = tmp->next;
@@ -69,7 +69,7 @@ static int	find_chunk_pos(t_stack *a, int min, int max)
 	pos = 0;
 	while (tmp)
 	{
-		if (tmp->value >= min && tmp->value <= max)
+		if (tmp->rank >= min && tmp->rank <= max)
 			return (pos);
 		tmp = tmp->next;
 		pos++;
@@ -99,6 +99,7 @@ void	medium_sort(t_stack **a, t_stack **b)
 	int	chunks;
 	int	i;
 
+	assign_ranks(*a);
 	size = stack_size(*a);
 	chunks = ft_sqrt(size);
 	if (chunks < 1)

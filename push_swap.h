@@ -57,6 +57,7 @@ int		ft_sqrt(int n);
 double	compute_disorder(t_stack *a);
 void	print_bench(double disorder, int orig_strat, int used_strat);
 void	adaptive_sort(t_data *data);
+void	assign_ranks(t_stack *a);
 void	simple_sort(t_stack **a, t_stack **b);
 void	medium_sort(t_stack **a, t_stack **b);
 void	complex_sort(t_stack **a, t_stack **b);
