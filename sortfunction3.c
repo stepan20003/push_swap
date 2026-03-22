@@ -14,8 +14,8 @@
 
 void	funct_rrr(t_stack **a, t_stack **b)
 {
-	t_stack *temp;
-	t_stack *start;
+	t_stack	*temp;
+	t_stack	*start;
 
 	if (a && *a && (*a)->next)
 	{
@@ -37,5 +37,6 @@ void	funct_rrr(t_stack **a, t_stack **b)
 		temp->next = *b;
 		*b = temp;
 	}
+	g_ops.rrr++;
 	write(1, "rrr\n", 4);
 }

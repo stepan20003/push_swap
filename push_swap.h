@@ -10,6 +10,21 @@
 # define COMPLEX	2
 # define ADAPTIVE	3
 
+typedef struct s_ops
+{
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}	t_ops;
+
 typedef struct s_stack
 {
 	int				value;
@@ -26,6 +41,8 @@ typedef struct s_data
 	double	disorder;
 }	t_data;
 
+extern t_ops	g_ops;
+
 int		ft_strcmp(char *s1, char *s2);
 void	parse_input(int count, char **argv, t_stack **a);
 int		is_sorted(t_stack *a);
@@ -38,7 +55,7 @@ void	ft_error(void);
 void	free_and_error(char **arr, int j);
 int		ft_sqrt(int n);
 double	compute_disorder(t_stack *a);
-void	print_bench(double disorder, int strategy);
+void	print_bench(double disorder, int orig_strat, int used_strat);
 void	adaptive_sort(t_data *data);
 void	simple_sort(t_stack **a, t_stack **b);
 void	medium_sort(t_stack **a, t_stack **b);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   disorder_fuct.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/21 15:08:00 by ststepan          #+#    #+#             */
+/*   Updated: 2026/03/22 17:00:00 by ststepan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	adaptive_sort(t_data *data)
@@ -18,6 +30,7 @@ void	adaptive_sort(t_data *data)
 		complex_sort(&data->a, &data->b);
 	}
 }
+
 double	compute_disorder(t_stack *a)
 {
 	t_stack	*i_node;

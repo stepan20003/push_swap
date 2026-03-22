@@ -49,7 +49,7 @@ int	is_duplicate(t_stack *a, int val)
 
 void	free_stack(t_stack *a)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	while (a)
 	{

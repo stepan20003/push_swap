@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ststepan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: agaspary <agaspary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:05:16 by ststepan          #+#    #+#             */
-/*   Updated: 2026/03/21 16:30:15 by ststepan         ###   ########.fr       */
+/*   Updated: 2026/03/22 17:45:46 by agaspary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_ops	g_ops;
 
 static int	get_strategy(char *flag)
 {
@@ -71,11 +73,23 @@ static void	init_data(t_data *data)
 	data->strategy = ADAPTIVE;
 	data->bench = 0;
 	data->disorder = 0;
+	g_ops.sa = 0;
+	g_ops.sb = 0;
+	g_ops.ss = 0;
+	g_ops.pa = 0;
+	g_ops.pb = 0;
+	g_ops.ra = 0;
+	g_ops.rb = 0;
+	g_ops.rr = 0;
+	g_ops.rra = 0;
+	g_ops.rrb = 0;
+	g_ops.rrr = 0;
 }
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
+	int		orig_strat;
 
 	if (argc < 2)
 		return (0);
@@ -85,15 +99,16 @@ int	main(int argc, char **argv)
 		return (0);
 	parse_input(argc - 1, argv + 1, &data.a);
 	data.disorder = compute_disorder(data.a);
+	orig_strat = data.strategy;
 	if (is_sorted(data.a))
 	{
 		if (data.bench)
-			print_bench(data.disorder, data.strategy);
+			print_bench(data.disorder, orig_strat, data.strategy);
 		return (free_stack(data.a), 0);
 	}
 	run_sort(&data);
 	if (data.bench)
-		print_bench(data.disorder, data.strategy);
+		print_bench(data.disorder, orig_strat, data.strategy);
 	free_stack(data.a);
 	free_stack(data.b);
 	return (0);

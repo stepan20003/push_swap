@@ -27,7 +27,7 @@ t_stack	*stack_new(int value)
 
 void	stack_add_back(t_stack **a, t_stack *new)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!a || !new)
 		return ;

@@ -47,13 +47,14 @@ int	ft_strcmp(char *s1, char *s2)
 
 int	ft_sqrt(int n)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i * i <= n)
 		i++;
 	return (i - 1);
 }
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	c;
